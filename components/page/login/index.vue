@@ -33,13 +33,10 @@ const handleRegister = () => {
     }
 };
 </script>
-
-
 <template>
-
     <body class="bg-[#09090B] text-white h-screen w-screen flex items-center justify-center">
         <div class="p-10">
-            <Tabs default-value="login" class="w-[400px]">
+            <Tabs default-value="login" class="w-96">
                 <TabsList class="grid w-full grid-cols-2 ">
                     <TabsTrigger class="border border-slate-400 m-1 hover:scale-105" value="login">
                         Login
@@ -57,10 +54,6 @@ const handleRegister = () => {
                             </CardDescription>
                         </CardHeader>
                         <CardContent class="space-y-2">
-                            <div class="space-y-1">
-                                <Label for="name">Name</Label>
-                                <Input id="name" default-value="Heitor Schleder" />
-                            </div>
                             <div class="space-y-1">
                                 <Label for="useremail">E-mail</Label>
                                 <Input id="useremail" default-value="heitorschleder@ecom.com.br" />
