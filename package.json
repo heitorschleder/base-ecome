@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@radix-icons/vue": "^1.0.0",
+    "@tabler/icons-vue": "^3.21.0",
+    "@vueuse/core": "^11.1.0",
     "class-variance-authority": "^0.7.0",
     "nuxt": "^3.13.2",
     "radix-vue": "^1.9.8",

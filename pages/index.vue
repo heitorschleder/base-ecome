@@ -1,5 +1,5 @@
 <script setup lang="ts">
 </script>
 <template>
-<h1>ola deu certo</h1>
+<h1 class="">ola deu certo</h1>
 </template>
