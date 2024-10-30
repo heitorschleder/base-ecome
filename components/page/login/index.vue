@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
-const showPasswordLogin = ref(false);
-const showPasswordRegister = ref(false);
-const showPasswordRegisterConfirmation = ref(false);
+const name = ref('');
+const userEmail = ref('');
 const password = ref('');
 const passwordConfirmation = ref('');
+const showPasswordRegister = ref(false);
+const showPasswordRegisterConfirmation = ref(false);
 const passwordMismatch = ref(false);
-
-const togglePasswordVisibilityLogin = () => {
-    showPasswordLogin.value = !showPasswordLogin.value;
-};
+const emailError = ref('');
+const nameError = ref('');
+const passwordError = ref('');
 
 const togglePasswordVisibilityRegister = () => {
     showPasswordRegister.value = !showPasswordRegister.value;
@@ -24,16 +24,58 @@ const checkPasswordsMatch = computed(() => {
     return password.value === passwordConfirmation.value;
 });
 
+const validateEmail = (email: string): boolean => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+};
+
 const handleRegister = () => {
+    emailError.value = '';
+    passwordMismatch.value = false;
+    nameError.value = '';
+    passwordError.value = '';
+
+    if (!name.value.trim()) {
+        nameError.value = 'Please enter your name';
+        return;
+    }
+
+    if (!validateEmail(userEmail.value)) {
+        emailError.value = 'Please enter a valid email address';
+        return;
+    }
+
+    if (!password.value.trim()) {
+        passwordError.value = 'Please enter your password';
+        return;
+    }
+
     if (!checkPasswordsMatch.value) {
         passwordMismatch.value = true;
-    } else {
-        passwordMismatch.value = false;
-        alert('lambimia');
+        return;
     }
+    alert('Registration successful!');
+};
+
+const handleLogin = () => {
+    emailError.value = '';
+
+    if (!validateEmail(userEmail.value)) {
+        emailError.value = 'Please enter a valid email address';
+        return;
+    }
+
+    if (!password.value.trim()) {
+        emailError.value = 'Please enter your password';
+        return;
+    }
+    alert('Login sucessful!');
+    userEmail.value = '';
+    password.value = '';
 };
 </script>
 <template>
+
     <body class="bg-[#09090B] text-white h-screen w-screen flex items-center justify-center">
         <div class="p-10">
             <Tabs default-value="login" class="w-96">
@@ -56,20 +98,24 @@ const handleRegister = () => {
                         <CardContent class="space-y-2">
                             <div class="space-y-1">
                                 <Label for="useremail">E-mail</Label>
-                                <Input id="useremail" default-value="heitorschleder@ecom.com.br" />
+                                <Input id="useremail" v-model="userEmail" />
+                                <div v-if="emailError" class="text-red-500">
+                                    {{ emailError }}
+                                </div>
                             </div>
                             <div class="space-y-1 relative">
                                 <Label for="password">Password</Label>
-                                <Input id="password" :type="showPasswordLogin ? 'text' : 'password'" />
-                                <button @click="togglePasswordVisibilityLogin" type="button"
+                                <Input id="password" v-model="password" :type="showPasswordRegister ? 'text' : 'password'" />
+                                <button @click="togglePasswordVisibilityRegister" type="button"
                                     class="absolute right-2 top-1/2 transform -translate-y-1/2 pt-5">
-                                    <span v-if="showPasswordLogin"><i class="ti ti-eye"></i></span>
+                                    <span v-if="showPasswordRegister"><i class="ti ti-eye"></i></span>
                                     <span v-else><i class="ti ti-eye-off"></i></span>
                                 </button>
                             </div>
                         </CardContent>
                         <CardFooter>
-                            <Button class="border border-slate-400 hover:bg-blue-900">Get In</Button>
+                            <Button @click="handleLogin" class="border border-slate-400 hover:bg-blue-900">Get
+                                In</Button>
                         </CardFooter>
                     </Card>
                 </TabsContent>
@@ -84,16 +130,25 @@ const handleRegister = () => {
                         <CardContent class="space-y-2">
                             <div class="space-y-1">
                                 <Label for="name">Name</Label>
-                                <Input id="name" default-value="Heitor Schleder" />
+                                <Input id="name" v-model="name" />
+                                <div v-if="nameError" class="text-red-500">
+                                    {{ nameError }}
+                                </div>
                             </div>
                             <div class="space-y-1">
                                 <Label for="useremail">E-mail</Label>
-                                <Input id="useremail" default-value="heitorschleder@ecom.com.br" />
+                                <Input id="useremail" v-model="userEmail" />
+                                <div v-if="emailError" class="text-red-500">
+                                    {{ emailError }}
+                                </div>
                             </div>
                             <div class="space-y-1 relative">
                                 <Label for="register-password">Password</Label>
                                 <Input id="register-password" v-model="password"
                                     :type="showPasswordRegister ? 'text' : 'password'" />
+                                <div v-if="passwordError" class="text-red-500">
+                                    {{ passwordError }}
+                                </div>
                                 <button @click="togglePasswordVisibilityRegister" type="button"
                                     class="absolute right-2 top-1/2 transform -translate-y-1/2 pt-5">
                                     <span v-if="showPasswordRegister"><i class="ti ti-eye"></i></span>
