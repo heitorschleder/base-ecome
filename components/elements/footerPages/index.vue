@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+
 </script>
 <template>
     <footer class="flex justify-center items-center h-48">
