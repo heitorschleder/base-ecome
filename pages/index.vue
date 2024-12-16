@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FooterPages from '~/components/elements/FooterPages'
+import FooterPages from '~/components/organisms/footerPages/index.vue'
 </script>
 <template>
     <!-- <div class="flex justify-center w-screen">

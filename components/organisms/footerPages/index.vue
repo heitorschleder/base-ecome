@@ -4,7 +4,7 @@
 <template>
     <footer class="flex justify-center items-center h-48">
         <div id="logo" class="flex items-center p-3 text-white">
-            <img class="max-w-36" src="../footerPages/images/gravata.png" alt="">
+            <img class="max-w-36" src="~/assets/images/gravata.png" alt="">
             <p class="w-48 p-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus cum dolorum maxime, dolor distinctio.</p>
         </div>
         <main class="w-[50vw] flex justify-evenly text-white">

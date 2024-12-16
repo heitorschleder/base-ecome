@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import FooterPages from '~/components/elements/FooterPages/index.vue';
 import buttonEdit from '~/components/ui/buttonEdit/buttonEdit.vue';
-import { ref } from 'vue';
+import FooterPages from '~/components/organisms/footerPages/index.vue';
 
-// resolver o problema do import ali, é coisa do nuxt 
+import { ref } from 'vue';
 
 const filters = ref({
     product: '',
@@ -103,7 +102,7 @@ const products = ref([
         </header>
         <div class="flex flex-1">
             <nav class="flex-col max-w-[20vw] p-10 text-center space-y-6">
-                <img class="w-24 h-24 border border-white rounded-full" src="./images/gravata.png" alt="">
+                <img class="w-24 h-24 border border-white rounded-full" src="~/assets/images/gravata.png" alt="">
                 <ul class="text-left space-y-3">
                     <li><a class="hover:underline" href="">My Products</a></li>
                     <li><a class="hover:underline" href="">Create Product</a></li>
@@ -132,7 +131,7 @@ const products = ref([
                             <TableCell>{{ item.amount }}</TableCell>
                             <TableCell>{{ item.quantity }}</TableCell>
                             <TableCell>
-                                <buttonEdit @click="testefun(item)" />
+                                <buttonEdit @click="testefun()" />
                             </TableCell>
                             <TableCell class="text-right">{{ item.status }}</TableCell>
                         </TableRow>
